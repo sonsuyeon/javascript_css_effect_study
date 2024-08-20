@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+    </head>
+    <body>
+        <p class="text"></p>
+    </body>
+    <script>
+        gsap.to(".text", {
+            duration: 3,
+            ease: "none",
+            text: "타이핑 효과를 낼 수 있어요!",
+            repeat: -1, // 무한 반복
+        });
+    </script>
+</html>
