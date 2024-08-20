@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>스크롤에 따라 비디오 제어</title>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    </head>
+    <style>
+        .wrap {
+            overflow-x: hidden;
+        }
+        .trigger {
+            height: 400px;
+            margin: 400px 0;
+            background: darkblue;
+            z-index: 1000 !important;
+        }
+        .video-area .pin-spacer {
+            width: 100% !important;
+        }
+        .video-area video {
+            display: block;
+            width: 100% !important;
+            height: 100vh;
+            object-fit: contain;
+            width: 100% !important;
+            max-width: 90% !important;
+            height: 50% !important;
+            max-height: 50% !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+        }
+    </style>
+
+    <body>
+        <div class="wrap">
+            <!-- 상단 트리거 요소, 스크롤 시작과 끝에 위치한 트리거 요소들 -->
+            <div class="trigger"></div>
+
+            <!-- 비디오 요소, 자동재생되지 않고 사용자 스크롤에 의해 제어됨 -->
+            <div class="video-area">
+                <video playsinline muted preload="auto">
+                    <source src="https://webimg.jestina.co.kr/UpData/jestina/2024/featured/24fall_J/video_24fall_J.mp4?rel=0" type="video/mp4" />
+                </video>
+            </div>
+
+            <!-- 하단 트리거 요소 -->
+            <div class="trigger"></div>
+        </div>
+
+        <script>
+            // 문서 내에서 비디오 요소를 선택
+            const video = document.querySelector("video");
+
+            // ScrollTrigger를 생성하여 스크롤에 따른 비디오 제어
+            ScrollTrigger.create({
+                trigger: "video", // 비디오 요소가 스크롤 트리거가 됨
+                start: "top top", // 스크롤이 비디오의 상단에 도달하면 시작
+                end: "+=3000", // 스크롤 3000px 동안 효과 지속
+                pin: true, // 비디오를 스크롤에 고정하여 화면에 계속 남아 있도록 함
+                scrub: 0, // 스크롤과 비디오 재생이 연동되도록 함 (scrub: 0은 스크롤과 동기화됨을 의미)
+                onUpdate: function (self) {
+                    // 스크롤 이벤트 발생 시마다 호출되는 함수
+                    duration = 6;
+                    video.currentTime = duration * self.progress; // *비디오 현재 재생시점 = 전체 길이 * 이벤트 진행률
+                    console.log(self.progress); // *진행률 확인
+                },
+            });
+        </script>
+    </body>
+</html>
