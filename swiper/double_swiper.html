@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    </head>
+    <body>
+        <style>
+            @charset "utf-8";
+            @import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Marcellus+SC&display=swap"); /* font-family 'Marcellus', 'Marcellus SC'*/
+            @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"); /* regular - 400, medium - 500, semibold - 600, bold - 700 */
+
+            body,
+            html {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            ul,
+            li,
+            dl,
+            dt,
+            dd,
+            p,
+            span {
+                margin: 0;
+                padding: 0;
+            }
+            a {
+                text-decoration: none;
+            }
+            *,
+            :after,
+            :before {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            :root {
+                --primary: #8c6f4f;
+                --second: #2a211b;
+            }
+
+            #sh_mainVisual {
+                position: relative;
+                z-index: 10;
+                overflow: hidden;
+                position: relative;
+                font-size: 16px;
+                font-weight: 400;
+                color: #777;
+                line-height: 1.8;
+                font-family: "Pretendard";
+            }
+
+            /* 텍스트 */
+            #sh_mainVisual .main_txt {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                z-index: 101;
+                display: flex;
+                flex-wrap: wrap;
+                width: 700px;
+                transform: translate(-50%, -50%);
+                transition: all 0.2s 0.2s;
+            }
+            #sh_mainVisual .main_txt .line {
+                width: 100%;
+                margin-bottom: 35px;
+                font-size: 95px;
+                line-height: 1.5;
+                color: transparent;
+                -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+                font-family: "Marcellus";
+            }
+
+            /* 배경이미지 */
+            .sh_main_slide {
+                height: 100vh;
+            }
+            .sh_main_slide:after {
+                display: block;
+                content: "";
+                position: absolute;
+                z-index: 100;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+            }
+            #sh_mainVisual ul li .bg {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: center no-repeat;
+                background-size: cover;
+                transition: all 1.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+            #sh_mainVisual ul li .bg01 {
+                background-image: url(https://hsell1016.shiningcorp.com/sh_img/index/main_banner/main_banner01.jpg);
+            }
+            #sh_mainVisual ul li .bg02 {
+                background-image: url(https://hsell1016.shiningcorp.com/sh_img/index/main_banner/main_banner02.jpg);
+            }
+            #sh_mainVisual ul li .bg03 {
+                background-image: url(https://hsell1016.shiningcorp.com/sh_img/index/main_banner/main_banner03.jpg);
+            }
+
+            #sh_mainVisual .tabs {
+                position: absolute;
+                z-index: 101;
+                top: 50%;
+                left: 65px;
+                transform: translateY(-50%);
+                width: max-content;
+                transition: all 0.1s 0.1s;
+            }
+            #sh_mainVisual .tabs .on {
+                padding-left: 20px;
+                opacity: 1;
+            }
+            #sh_mainVisual .tabs .on:before {
+                opacity: 1;
+            }
+            #sh_mainVisual .tabs span {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: auto;
+                border-radius: 0;
+                font-size: 19px;
+                color: #fff;
+                opacity: 0.4;
+                background: none;
+                transition: all 0.3s;
+                font-family: "Marcellus";
+            }
+            #sh_mainVisual .tabs span:before {
+                opacity: 0;
+                position: absolute;
+                content: "";
+                left: 0;
+                top: 50%;
+                width: 5px;
+                height: 5px;
+                border-radius: 50px;
+                transition: all 0.3s;
+                background: #fff;
+            }
+            #sh_mainVisual .tabs span + span {
+                margin-top: 13px;
+            }
+
+            #sh_mainVisual .s_txt {
+                display: flex;
+                gap: 15px;
+                margin-left: auto;
+                color: #fff;
+            }
+            #sh_mainVisual .s_txt span {
+                margin-top: 12px;
+                font-size: 90px;
+                line-height: 0;
+                font-family: "Marcellus";
+            }
+            #sh_mainVisual .s_txt div {
+                font-size: 17px;
+                font-weight: 600;
+            }
+
+            #sh_mainVisual .crrent {
+                overflow: hidden;
+                width: 100%;
+                font-size: 95px;
+                line-height: 1.5;
+                color: #fff;
+                font-family: "Marcellus";
+            }
+            #sh_mainVisual .crrent .swiper_num {
+                overflow: hidden;
+                position: absolute;
+                bottom: 45px;
+                left: -45px;
+                height: 35px;
+                font-size: 25px;
+            }
+            #sh_mainVisual .crrent .swiper_txt {
+                overflow: hidden;
+                position: absolute;
+                bottom: -35px;
+                width: 100%;
+            }
+            #sh_mainVisual .crrent .swiper_txt ul {
+                height: 140px;
+            }
+
+            /* 반응형 [s] */
+            @media (max-width: 1400px) {
+                #sh_mainVisual .main_txt .line {
+                    font-size: 80px;
+                }
+                #sh_mainVisual .crrent {
+                    font-size: 80px;
+                }
+                #sh_mainVisual ul li .bg {
+                    background-position: center right;
+                }
+            }
+            @media (max-width: 1024px) {
+                #sh_mainVisual .main_txt {
+                    width: 75%;
+                }
+                #sh_mainVisual .tabs {
+                    display: flex;
+                    width: 100%;
+                    top: unset;
+                    bottom: 20px;
+                    left: 50%;
+                    text-align: center;
+                    transform: translate(-50%, 0);
+                }
+                #sh_mainVisual .tabs span {
+                    font-size: 15px;
+                }
+                #sh_mainVisual .tabs span + span {
+                    margin-top: 0;
+                }
+                #sh_mainVisual .tabs span:before {
+                    display: none;
+                }
+                #sh_mainVisual .tabs .on {
+                    padding-left: 0;
+                }
+            }
+            @media (max-width: 768px) {
+                #sh_mainVisual .main_txt {
+                    display: block;
+                    text-align: center;
+                }
+                #sh_mainVisual .main_txt .line {
+                    margin-bottom: 0;
+                    font-size: 60px;
+                    line-height: 1.2;
+                }
+                #sh_mainVisual .crrent {
+                    position: relative;
+                    display: flex;
+                    font-size: 60px;
+                    justify-content: center;
+                }
+                #sh_mainVisual .crrent .swiper_num {
+                    position: unset;
+                    margin: 0;
+                }
+                #sh_mainVisual .crrent .swiper_txt {
+                    position: unset;
+                    width: auto;
+                    margin: 0;
+                    margin-left: 20px;
+                    text-align: left;
+                }
+                #sh_mainVisual .crrent .swiper_txt ul {
+                    height: 120px;
+                }
+                #sh_mainVisual .s_txt {
+                    justify-content: center;
+                    margin-top: 17px;
+                    text-align: left;
+                }
+            }
+            @media (max-width: 480px) {
+                #sh_mainVisual .main_txt .line {
+                    font-size: 50px;
+                }
+                #sh_mainVisual .crrent {
+                    font-size: 50px;
+                }
+                #sh_mainVisual .crrent .swiper_num {
+                    font-size: 20px;
+                }
+                #sh_mainVisual .crrent .swiper_txt ul {
+                    height: 75px;
+                }
+                #sh_mainVisual .s_txt div {
+                    font-size: 15px;
+                }
+            }
+            /* 반응형 [e] */
+        </style>
+        HTML CSS JSResult Skip Results Iframe EDIT ON
+        <div id="sh_mainVisual">
+            <div class="main_txt">
+                <div class="line">
+                    <p>We make</p>
+                    <p>Builder</p>
+                </div>
+
+                <div class="crrent">
+                    <div class="swiper_num swiper-container">
+                        <ul class="swiper-wrapper">
+                            <li class="swiper-slide">01</li>
+                            <li class="swiper-slide">02</li>
+                            <li class="swiper-slide">03</li>
+                        </ul>
+                    </div>
+
+                    <div class="swiper_txt swiper-container">
+                        <ul class="swiper-wrapper">
+                            <li class="swiper-slide">Culture</li>
+                            <li class="swiper-slide">Nature</li>
+                            <li class="swiper-slide">Signature</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="s_txt">
+                    <span>;</span>
+                    <div>
+                        건설을 넘어<br />
+                        더 나은 문화 공간을
+                    </div>
+                </div>
+            </div>
+
+            <div class="sh_main_slide swiper-container">
+                <ul class="swiper-wrapper">
+                    <li class="swiper-slide"><div class="bg bg01"></div></li>
+                    <li class="swiper-slide"><div class="bg bg02"></div></li>
+                    <li class="swiper-slide"><div class="bg bg03"></div></li>
+                </ul>
+            </div>
+
+            <div class="tabs"></div>
+        </div>
+
+        <script>
+            var tab = ["make Culture", "make Nature", "make Signature"];
+            var mainSwiper = new Swiper(".sh_main_slide", {
+                loop: true,
+                loopedSlides: 3,
+                effect: "fade",
+                speed: 1200,
+                allowTouchMove: false,
+                spaceBetween: 0,
+                slidesPerView: "1",
+                slideActiveClass: "on",
+                pagination: {
+                    el: "#sh_mainVisual .tabs",
+                    clickable: true,
+                    bulletActiveClass: "on",
+                    renderBullet: function (index, className) {
+                        return '<span class="' + className + '">' + tab[index] + "</span>";
+                    },
+                },
+                autoplay: {
+                    delay: 3200,
+                    disableOnInteraction: false,
+                },
+            });
+
+            var swiperTxt = new Swiper(".swiper_txt", {
+                loop: true,
+                loopedSlides: 3,
+                speed: 1200,
+                direction: "vertical",
+                slidesPerView: "1",
+                slideActiveClass: "active",
+                allowTouchMove: false,
+                spaceBetween: 30,
+                loopedSlides: 3,
+            });
+
+            var swiperNum = new Swiper(".swiper_num", {
+                loop: true,
+                loopedSlides: 3,
+                speed: 1200,
+                allowTouchMove: false,
+                direction: "vertical",
+                slidesPerView: "1",
+                pagination: {
+                    el: "#sh_mainVisual .tabs",
+                    clickable: true,
+                    bulletActiveClass: "on",
+                    renderBullet: function (index, className) {
+                        return '<span class="' + className + '">' + tab[index] + "</span>";
+                    },
+                },
+                autoplay: {
+                    delay: 3200,
+                    disableOnInteraction: false,
+                },
+            });
+
+            mainSwiper.controller.control = swiperTxt;
+            swiperTxt.controller.control = mainSwiper;
+        </script>
+    </body>
+</html>
