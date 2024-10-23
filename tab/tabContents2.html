@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tab Menu</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <style>
+            @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css"); /* regular-400, medium-500, semibold-600, bold-700 */
+
+            body,
+            html {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                font-family: "Pretendard";
+            }
+            ul,
+            li,
+            dl,
+            dt,
+            dd,
+            p,
+            span {
+                margin: 0;
+                padding: 0;
+            }
+            a {
+                text-decoration: none;
+            }
+            li {
+                list-style: none;
+            }
+            a {
+                text-decoration: none;
+            }
+            *,
+            :after,
+            :before {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            .tab {
+                display: none;
+            }
+            .tab.on {
+                display: block;
+            }
+            .tab-container {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                margin-top: 50px;
+                font-size: 18px;
+            }
+            .tabs {
+                padding: 10px 20px;
+                border-radius: 50px;
+                font-weight: 700;
+                cursor: pointer;
+                background: #f2f2f2;
+                transition: all 0.3s;
+            }
+            .tabs:hover {
+                padding: 10px 30px;
+            }
+            .tabs.on {
+                color: #fff;
+                background: #111;
+            }
+            .tab_wrap {
+                margin-top: 30px;
+                padding: 50px;
+                text-align: center;
+                background: #f2f2f2;
+            }
+        </style>
+        <div class="tab-container">
+            <div class="tabs on" onclick="openTab('Tab1')">Tab 1</div>
+            <div class="tabs" onclick="openTab('Tab2')">Tab 2</div>
+            <div class="tabs" onclick="openTab('Tab3')">Tab 3</div>
+        </div>
+
+        <div class="tab_wrap">
+            <div id="Tab1" class="tab on">
+                <h2>Tab 1 Content</h2>
+                <p>This is Tab 1 content.</p>
+            </div>
+            <div id="Tab2" class="tab">
+                <h2>Tab 2 Content</h2>
+                <p>This is Tab 2 content.</p>
+            </div>
+            <div id="Tab3" class="tab">
+                <h2>Tab 3 Content</h2>
+                <p>This is Tab 3 content.</p>
+            </div>
+        </div>
+        <script>
+            /*
+    function openTab(tabName) {
+        document.querySelectorAll(".tab, .tabs").forEach(function (el) {
+            el.classList.remove("on");
+        });
+        document.getElementById(tabName).classList.add("on");
+        document.querySelector(".tabs[onclick=\"openTab('" + tabName + "')\"]").classList.add("on");
+    }
+        */
+            function openTab(tabName) {
+                // 탭 콘텐츠에서 on 클래스를 제거
+                document.querySelectorAll(".tab").forEach(function (tab) {
+                    tab.classList.remove("on");
+                });
+
+                // 탭 버튼에서 on 클래스를 제거
+                document.querySelectorAll(".tabs").forEach(function (tabButton) {
+                    tabButton.classList.remove("on");
+                });
+
+                // 선택된 탭 콘텐츠에 on 클래스 추가
+                document.getElementById(tabName).classList.add("on");
+
+                // 선택된 탭 버튼에 on 클래스 추가
+                document.querySelector(".tabs[onclick=\"openTab('" + tabName + "')\"]").classList.add("on");
+            }
+        </script>
+    </body>
+</html>

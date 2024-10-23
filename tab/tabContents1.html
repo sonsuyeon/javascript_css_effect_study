@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tab Menu</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+
+            .tab-menu {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .tab-btn {
+                padding: 10px 20px;
+                cursor: pointer;
+                background-color: #f0f0f0;
+                border: none;
+                border-radius: 4px;
+                transition: background-color 0.3s;
+            }
+
+            .tab-btn:hover,
+            .tab-btn.active {
+                background-color: #ccc;
+            }
+
+            .tab-content {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .content-item {
+                padding: 15px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                background-color: #f9f9f9;
+                display: none;
+            }
+
+            .content-item.show {
+                display: block;
+            }
+        </style>
+        <div class="tab-menu">
+            <button class="tab-btn" data-target="all">전체</button>
+            <button class="tab-btn" data-target="menu1">menu1</button>
+            <button class="tab-btn" data-target="menu2">menu2</button>
+            <button class="tab-btn" data-target="menu3">menu3</button>
+        </div>
+
+        <div class="tab-content">
+            <div class="content-item" data-category="menu1">item1 - menu1</div>
+            <div class="content-item" data-category="menu1,menu2">item2 - menu1, menu2</div>
+            <div class="content-item" data-category="menu2">item3 - menu2</div>
+            <div class="content-item" data-category="menu2,menu3">item4 - menu2, menu3</div>
+            <div class="content-item" data-category="menu3">item5 - menu3</div>
+            <div class="content-item" data-category="menu1,menu3">item6 - menu1, menu3</div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const tabButtons = document.querySelectorAll(".tab-btn");
+                const contentItems = document.querySelectorAll(".content-item");
+
+                tabButtons.forEach((button) => {
+                    button.addEventListener("click", () => {
+                        // 모든 버튼에서 active 클래스 제거
+                        tabButtons.forEach((btn) => btn.classList.remove("active"));
+                        button.classList.add("active");
+
+                        // 선택된 탭에 맞는 콘텐츠만 표시
+                        const targetCategory = button.getAttribute("data-target");
+
+                        contentItems.forEach((item) => {
+                            const categories = item.getAttribute("data-category").split(",");
+
+                            // '전체'이거나, 해당 아이템이 선택된 카테고리에 속하는 경우만 보여줌
+                            if (targetCategory === "all" || categories.includes(targetCategory)) {
+                                item.classList.add("show");
+                            } else {
+                                item.classList.remove("show");
+                            }
+                        });
+                    });
+                });
+
+                // 기본적으로 '전체' 탭을 활성화
+                document.querySelector('.tab-btn[data-target="all"]').click();
+            });
+        </script>
+    </body>
+</html>
